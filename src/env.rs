@@ -366,9 +366,9 @@ mod tests {
             (&["GOOGLE_CLOUD_SHELL=1"], Profile::NoTty),
             (&["TERM=xterm-256color", "TTY_FORCE=1"], Profile::Ansi256),
         ];
-        for (env, expected) in cases {
-            let v: Vec<String> = env.iter().map(|s| s.to_string()).collect();
-            assert_eq!(&env(&v), expected, "env={env:?}");
+        for (envp, expected) in cases {
+            let v: Vec<String> = envp.iter().map(|s| s.to_string()).collect();
+            assert_eq!(&env(&v), expected, "env={envp:?}");
         }
     }
 
