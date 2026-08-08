@@ -1,0 +1,9 @@
+[package]
+name = "charming-colorprofile"
+version = "0.4.3"
+edition = "2021"
+description = "Cleanroom Rust port of Charmbracelet's colorprofile v0.4.3 (color downsampling based on output, environment, and terminfo)"
+license = "MIT"
+
+[dependencies]
+charming-x-ansi = { path = "../charming-x-ansi" }

@@ -1,0 +1,43 @@
+name: Publish to Crates.io
+
+on:
+  push:
+    branches:
+      - dev
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    name: Publish Crate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Fetch sibling charming-x-ansi (pinned)
+        uses: actions/checkout@v4
+        with:
+          repository: coderbants/charming-x-ansi
+          path: siblings/charming-x-ansi
+          ref: dev
+      - name: Place sibling crate
+        run: mv siblings/charming-x-ansi ../charming-x-ansi
+      - name: Test
+        run: cargo test --all-targets
+      - name: Verify example parity (upstream Go vs Rust)
+        run: ./scripts/verify_examples.sh
+      - name: Create GitHub Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release create "$GITHUB_REF_NAME" --generate-notes
+      - name: Publish to crates.io
+        if: startsWith(github.ref, 'refs/tags/v')
+        continue-on-error: true
+        env:
+          CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
+        run: cargo publish --token ${CARGO_REGISTRY_TOKEN}
