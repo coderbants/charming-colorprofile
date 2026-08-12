@@ -75,3 +75,9 @@ jobs:
       - name: Test (all targets, all integration tests)
         run: cargo test --all-targets
 
+
+      - name: verify_examples
+        run: ./scripts/verify_examples.sh
+
+      - name: verify_mapping
+        run: ./scripts/verify_mapping.sh

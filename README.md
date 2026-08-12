@@ -1,6 +1,7 @@
 <p>
     <a href="charming-colorprofile.png"><img src="charming-colorprofile.png" width="313" alt="Charming Colorprofile"></a><br>
     <a href="https://crates.io/crates/charming-colorprofile"><img src="https://img.shields.io/crates/v/charming-colorprofile.svg" alt="crates.io"></a>
+    <a href="https://github.com/coderbants/charming-colorprofile/actions"><img src="https://github.com/coderbants/charming-colorprofile/actions/workflows/ci.yml/badge.svg" alt="Build Status"></a>
 </p>
 
 # Charming Colorprofile (`charming-colorprofile`)
@@ -18,3 +19,33 @@ library via the workspace parity harness (`/Users/jonny/Projects/charming/tools/
 ```sh
 cargo add charming-colorprofile
 ```
+
+
+## Usage
+
+Detect the color profile for a terminal, then downsample colors to what it
+supports:
+
+```rust
+use charming_colorprofile::{detect, Profile};
+use charming_x_ansi::style::Color;
+use charming_x_ansi::color::RGBColor;
+use std::io::IsTerminal;
+
+// Detect the profile from whether we're attached to a TTY and the
+// environment (COLORTERM, TERM, NO_COLOR, ...).
+let env: Vec<String> = std::env::vars().map(|(k, v)| format!("{k}={v}")).collect();
+let profile = detect(std::io::stdout().is_terminal(), &env);
+println!("terminal color profile: {}", profile.string());
+
+// Convert a TrueColor value to the closest color the profile supports.
+let red = Color::RGB(RGBColor { r: 255, g: 0, b: 0 });
+match profile.convert(red) {
+    Some(c) => println!("renders as: {}", c.string()),
+    None => println!("no color support"),
+}
+```
+
+The profile is also used to render text: `new_writer(std::io::stdout(), &env)`
+wraps an output stream and applies profile-aware color sequences as you write
+styled text to it.
