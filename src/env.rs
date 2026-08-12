@@ -190,15 +190,11 @@ fn env_color_profile(env: &Environ) -> Profile {
         {
             return Profile::TrueColor;
         }
-        _ if term.starts_with("tmux") || term.starts_with("screen") => {
-            if p < Profile::Ansi256 {
-                p = Profile::Ansi256;
-            }
+        _ if (term.starts_with("tmux") || term.starts_with("screen")) && p < Profile::Ansi256 => {
+            p = Profile::Ansi256;
         }
-        _ if term.starts_with("xterm") => {
-            if p < Profile::Ansi {
-                p = Profile::Ansi;
-            }
+        _ if term.starts_with("xterm") && p < Profile::Ansi => {
+            p = Profile::Ansi;
         }
         _ => {}
     }
