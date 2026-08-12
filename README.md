@@ -1,13 +1,17 @@
-# charming-colorprofile
+<p>
+    <a href="charming-colorprofile.png"><img src="charming-colorprofile.png" width="313" alt="Charming Colorprofile"></a><br>
+    <a href="https://crates.io/crates/charming-colorprofile"><img src="https://img.shields.io/crates/v/charming-colorprofile.svg" alt="crates.io"></a>
+</p>
 
-Cleanroom Rust port of [Charmbracelet's colorprofile](https://github.com/charmbracelet/colorprofile)
-at **v0.4.3** — automatic downsampling of ANSI colors based on output, environment
-variables, and Terminfo databases.
+# Charming Colorprofile (`charming-colorprofile`)
+
+**Charming Colorprofile** is a complete, from-scratch Rust port of [colorprofile](https://github.com/charmbracelet/colorprofile), Charmbracelet's ANSI color-profile detection library — automatic downsampling of colors based on output, environment variables, and Terminfo databases. It tracks upstream on a rolling basis — this crate mirrors upstream `v0.4.3` — with the same **1:1 parity** goals as the rest of the Charming port family, favoring fidelity to upstream semantics over Rust-native rewrites.
+
+It's part of the Charming port family of the Bubble Tea ecosystem and builds on [charming-x-ansi](https://github.com/coderbants/charming-x-ansi) (ANSI primitives); it's used by [charming-ultraviolet](https://github.com/coderbants/charming-ultraviolet), [charming-lipgloss](https://github.com/coderbants/charming-lipgloss) and [charming-bubbletea](https://github.com/coderbants/charming-bubbletea).
 
 Ported by hand from the upstream Go source (checked out in `upstream-go/`, gitignored);
 see `UPSTREAM_MAPPING.md` for the full accounting. Verified byte-for-byte against the Go
 library via the workspace parity harness (`/Users/jonny/Projects/charming/tools/go-probes/`).
-
 
 ## Installation
 
