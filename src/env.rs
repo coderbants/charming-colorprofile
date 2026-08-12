@@ -121,10 +121,8 @@ fn color_profile(isatty: bool, env: &Environ) -> Profile {
         return p;
     }
 
-    if cli_color(env) {
-        if isatty && !is_dumb && p < Profile::Ansi {
-            p = Profile::Ansi;
-        }
+    if cli_color(env) && isatty && !is_dumb && p < Profile::Ansi {
+        p = Profile::Ansi;
     }
 
     p
@@ -166,7 +164,8 @@ fn color_term(env: &Environ) -> bool {
 /// EnvColorProfile infers the color profile from the environment.
 fn env_color_profile(env: &Environ) -> Profile {
     let term = env.lookup("TERM");
-    let mut p = if term.is_none() || term.as_deref().map(|t| t.is_empty()).unwrap_or(true)
+    let mut p = if term.is_none()
+        || term.as_deref().map(|t| t.is_empty()).unwrap_or(true)
         || term.as_deref() == Some(DUMB_TERM)
     {
         Profile::NoTty
@@ -176,9 +175,18 @@ fn env_color_profile(env: &Environ) -> Profile {
     let term = term.unwrap_or_default();
 
     match () {
-        _ if ["alacritty", "contour", "foot", "ghostty", "kitty", "rio", "st", "wezterm"]
-            .iter()
-            .any(|t| term.contains(t)) =>
+        _ if [
+            "alacritty",
+            "contour",
+            "foot",
+            "ghostty",
+            "kitty",
+            "rio",
+            "st",
+            "wezterm",
+        ]
+        .iter()
+        .any(|t| term.contains(t)) =>
         {
             return Profile::TrueColor;
         }
@@ -200,7 +208,11 @@ fn env_color_profile(env: &Environ) -> Profile {
         return Profile::TrueColor;
     }
 
-    if env.get("GOOGLE_CLOUD_SHELL").parse::<bool>().unwrap_or(false) {
+    if env
+        .get("GOOGLE_CLOUD_SHELL")
+        .parse::<bool>()
+        .unwrap_or(false)
+    {
         return Profile::TrueColor;
     }
 
@@ -281,10 +293,7 @@ mod tests {
     use super::*;
 
     fn envs(pairs: &[(&str, &str)]) -> Vec<String> {
-        pairs
-            .iter()
-            .map(|(k, v)| format!("{k}={v}"))
-            .collect()
+        pairs.iter().map(|(k, v)| format!("{k}={v}")).collect()
     }
 
     #[test]
@@ -297,15 +306,9 @@ mod tests {
 
     #[test]
     fn test_env_profile_terms() {
-        assert_eq!(
-            env(&envs(&[("TERM", "xterm-256color")])),
-            Profile::Ansi256
-        );
+        assert_eq!(env(&envs(&[("TERM", "xterm-256color")])), Profile::Ansi256);
         assert_eq!(env(&envs(&[("TERM", "xterm")])), Profile::Ansi);
-        assert_eq!(
-            env(&envs(&[("TERM", "kitty")])),
-            Profile::TrueColor
-        );
+        assert_eq!(env(&envs(&[("TERM", "kitty")])), Profile::TrueColor);
         assert_eq!(
             env(&envs(&[("TERM", "xterm"), ("COLORTERM", "truecolor")])),
             Profile::TrueColor
@@ -342,7 +345,6 @@ mod tests {
             Profile::Ansi
         );
     }
-
 
     #[test]
     fn test_env_go_verified_vectors() {

@@ -178,7 +178,10 @@ fn handle_sgr(profile: &Profile, parser: &charming_x_ansi::parser::Parser, buf: 
                     i += 1;
                     continue;
                 }
-                style.push(color_param(ColorPos::Fg, profile.convert(c.unwrap_or(Color::Default))));
+                style.push(color_param(
+                    ColorPos::Fg,
+                    profile.convert(c.unwrap_or(Color::Default)),
+                ));
             }
             39 => {
                 // default foreground color
@@ -208,7 +211,10 @@ fn handle_sgr(profile: &Profile, parser: &charming_x_ansi::parser::Parser, buf: 
                     i += 1;
                     continue;
                 }
-                style.push(color_param(ColorPos::Bg, profile.convert(c.unwrap_or(Color::Default))));
+                style.push(color_param(
+                    ColorPos::Bg,
+                    profile.convert(c.unwrap_or(Color::Default)),
+                ));
             }
             49 => {
                 // default background color
@@ -229,7 +235,10 @@ fn handle_sgr(profile: &Profile, parser: &charming_x_ansi::parser::Parser, buf: 
                     i += 1;
                     continue;
                 }
-                style.push(color_param(ColorPos::Ul, profile.convert(c.unwrap_or(Color::Default))));
+                style.push(color_param(
+                    ColorPos::Ul,
+                    profile.convert(c.unwrap_or(Color::Default)),
+                ));
             }
             59 => {
                 // default underline color
@@ -326,7 +335,6 @@ mod tests {
         let out = write_with(Profile::Ansi, "\x1b[31mred\x1b[0m");
         assert_eq!(out, "\x1b[31mred\x1b[m");
     }
-
 
     #[test]
     fn test_writer_go_verified_vectors() {

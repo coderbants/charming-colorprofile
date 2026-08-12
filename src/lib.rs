@@ -115,11 +115,7 @@ mod tests {
 
     #[test]
     fn test_convert() {
-        let rgb = Color::RGB(charming_x_ansi::color::RGBColor {
-            r: 255,
-            g: 0,
-            b: 0,
-        });
+        let rgb = Color::RGB(charming_x_ansi::color::RGBColor { r: 255, g: 0, b: 0 });
         // TrueColor passthrough.
         assert_eq!(Profile::TrueColor.convert(rgb), Some(rgb));
         // ANSI256 downsampling.
@@ -137,6 +133,9 @@ mod tests {
             Some(Color::Basic(1))
         );
         // Indexed to ANSI.
-        assert_eq!(Profile::Ansi.convert(Color::Indexed(196)), Some(Color::Basic(9)));
+        assert_eq!(
+            Profile::Ansi.convert(Color::Indexed(196)),
+            Some(Color::Basic(9))
+        );
     }
 }
