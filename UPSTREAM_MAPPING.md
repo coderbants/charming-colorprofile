@@ -1,10 +1,10 @@
-# Upstream Go File Mapping: `charming-colorprofile`
+# Upstream Go File Mapping: `rusty-colorprofile`
 
 Target Upstream Tag: `github.com/charmbracelet/colorprofile@v0.4.3`
 
 This mapping accounts for **every** file in the upstream repository at this pin. The full
-repo is checked out locally in `upstream-go/` (gitignored). Both charming-lipgloss v2.0.5
-and charming-bubbletea v2.0.8 require colorprofile v0.4.3, so a single pin is needed
+repo is checked out locally in `upstream-go/` (gitignored). Both rusty-lipgloss v2.0.5
+and rusty-bubbletea v2.0.8 require colorprofile v0.4.3, so a single pin is needed
 (no diff-forward required).
 
 ## Source Files
@@ -12,7 +12,7 @@ and charming-bubbletea v2.0.8 require colorprofile v0.4.3, so a single pin is ne
 | Upstream Go File | Rust Equivalent / Status | Notes / Description |
 | :--- | :--- | :--- |
 | `doc.go` | `src/lib.rs` | Package docs; `Profile` enum + `Convert` (cache omitted: perf-only, like the upstream `sync.RWMutex` map) |
-| `profile.go` | `src/lib.rs` | `Profile` constants, `String()`, `Convert` (ANSI256/ANSI downsampling via `charming-x-ansi` `convert_256`/`convert_16`/`ansi256_to_16`) |
+| `profile.go` | `src/lib.rs` | `Profile` constants, `String()`, `Convert` (ANSI256/ANSI downsampling via `rusty-x-ansi` `convert_256`/`convert_16`/`ansi256_to_16`) |
 | `env.go` | `src/env.rs` — **Ported** | `Detect` (tty-ness passed as a parameter instead of a `term.File` writer), `Env`, `colorProfile`, `envColorProfile`, `envNoColor`/`cliColor`/`cliColorForced` (Go `strconv.ParseBool` semantics), `Terminfo` (DB loader deferred: returns the ANSI baseline, matching Go's nil-db behavior), `Tmux` (runs `tmux info`), `environ` helpers |
 | `env_other.go` | `src/env.rs` | Non-Windows `windowsColorProfile` stub (returns None) |
 | `env_windows.go` | `src/env.rs` — Deferred | Windows Console API profile detection (ConEmuANSI/ANSICON/NT build numbers) |
@@ -38,5 +38,5 @@ and charming-bubbletea v2.0.8 require colorprofile v0.4.3, so a single pin is ne
 
 - `cargo test --all-targets` (all green), `cargo build` zero warnings.
 - Writer outputs cross-checked against the real Go library via the workspace parity
-  harness (`/Users/jonny/Projects/charming/tools/go-probes/colorprofile/`).
+  harness (`/Users/jonny/Projects/rusty/tools/go-probes/colorprofile/`).
 - `scripts/verify_mapping.sh` verifies every upstream `*.go` file is accounted for here.

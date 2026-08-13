@@ -7,9 +7,9 @@
 //! </public-docs>
 
 use crate::{detect, Profile};
-use charming_x_ansi::color::{BasicColor, IndexedColor, RGBColor};
-use charming_x_ansi::parser::{decode_sequence, get_parser, has_csi_prefix};
-use charming_x_ansi::style::{read_style_color, Color};
+use rusty_x_ansi::color::{BasicColor, IndexedColor, RGBColor};
+use rusty_x_ansi::parser::{decode_sequence, get_parser, has_csi_prefix};
+use rusty_x_ansi::style::{read_style_color, Color};
 use std::io::{self, Write};
 
 /// NewWriter creates a new color profile writer that downgrades color
@@ -36,7 +36,7 @@ impl<W: Write> Writer<W> {
         match self.profile {
             Profile::TrueColor => self.forward.write(p),
             Profile::NoTty | Profile::Unknown => {
-                let stripped = charming_x_ansi::util::strip(std::str::from_utf8(p).unwrap_or(""));
+                let stripped = rusty_x_ansi::util::strip(std::str::from_utf8(p).unwrap_or(""));
                 self.forward.write_all(stripped.as_bytes())?;
                 Ok(p.len())
             }
@@ -50,7 +50,7 @@ impl<W: Write> Writer<W> {
     /// downsample downgrades the given text to the appropriate color profile.
     fn downsample(&mut self, p: &[u8]) -> io::Result<()> {
         let mut buf: Vec<u8> = Vec::new();
-        let mut state = charming_x_ansi::parser::NORMAL_STATE;
+        let mut state = rusty_x_ansi::parser::NORMAL_STATE;
         let mut parser = get_parser();
 
         let mut rest = p;
@@ -139,14 +139,14 @@ fn color_param(pos: ColorPos, c: Option<Color>) -> String {
 
 /// handleSgr processes an SGR sequence and appends the downsampled style to
 /// the buffer.
-fn handle_sgr(profile: &Profile, parser: &charming_x_ansi::parser::Parser, buf: &mut Vec<u8>) {
+fn handle_sgr(profile: &Profile, parser: &rusty_x_ansi::parser::Parser, buf: &mut Vec<u8>) {
     let mut style: StyleParams = Vec::new();
     let params = parser.params().as_slice().to_vec();
 
     let mut i = 0usize;
     while i < params.len() {
-        let param = params[i] & !charming_x_ansi::parser::HAS_MORE_FLAG;
-        if param == charming_x_ansi::parser::MISSING_PARAM {
+        let param = params[i] & !rusty_x_ansi::parser::HAS_MORE_FLAG;
+        if param == rusty_x_ansi::parser::MISSING_PARAM {
             style.push("".to_string());
             i += 1;
             continue;

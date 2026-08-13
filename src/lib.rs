@@ -12,8 +12,8 @@ mod writer;
 pub use env::{detect, env, environ, terminfo, tmux, Environ};
 pub use writer::{new_writer, Writer};
 
-use charming_x_ansi::color::{ansi256_to_16, convert_16, convert_256};
-use charming_x_ansi::style::Color;
+use rusty_x_ansi::color::{ansi256_to_16, convert_16, convert_256};
+use rusty_x_ansi::style::Color;
 use std::sync::OnceLock;
 
 /// Profile is a color profile: NoTTY, Ascii, ANSI, ANSI256, or TrueColor.
@@ -82,13 +82,13 @@ impl Profile {
 
 /// Convert16 converts a 256-color index to a 16-color ANSI color.
 /// Re-exported for parity with the upstream `ansi.Convert16` usage.
-pub fn convert16(c: u8) -> charming_x_ansi::color::BasicColor {
+pub fn convert16(c: u8) -> rusty_x_ansi::color::BasicColor {
     ansi256_to_16(c)
 }
 
 /// Convert256 converts an RGB color to a 256-color index.
 /// Re-exported for parity with the upstream `ansi.Convert256` usage.
-pub fn convert256(r: u8, g: u8, b: u8) -> charming_x_ansi::color::IndexedColor {
+pub fn convert256(r: u8, g: u8, b: u8) -> rusty_x_ansi::color::IndexedColor {
     convert_256(r, g, b)
 }
 
@@ -115,7 +115,7 @@ mod tests {
 
     #[test]
     fn test_convert() {
-        let rgb = Color::RGB(charming_x_ansi::color::RGBColor { r: 255, g: 0, b: 0 });
+        let rgb = Color::RGB(rusty_x_ansi::color::RGBColor { r: 255, g: 0, b: 0 });
         // TrueColor passthrough.
         assert_eq!(Profile::TrueColor.convert(rgb), Some(rgb));
         // ANSI256 downsampling.

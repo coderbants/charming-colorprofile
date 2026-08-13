@@ -1,23 +1,23 @@
 <p>
-    <a href="charming-colorprofile.png"><img src="charming-colorprofile.png" width="313" alt="Charming Colorprofile"></a><br>
-    <a href="https://crates.io/crates/charming-colorprofile"><img src="https://img.shields.io/crates/v/charming-colorprofile.svg" alt="crates.io"></a>
-    <a href="https://github.com/coderbants/charming-colorprofile/actions"><img src="https://github.com/coderbants/charming-colorprofile/actions/workflows/ci.yml/badge.svg" alt="Build Status"></a>
+    <a href="rusty-colorprofile.png"><img src="rusty-colorprofile.png" width="313" alt="Rusty Colorprofile"></a><br>
+    <a href="https://crates.io/crates/rusty-colorprofile"><img src="https://img.shields.io/crates/v/rusty-colorprofile.svg" alt="crates.io"></a>
+    <a href="https://github.com/coderbants/rusty-colorprofile/actions"><img src="https://github.com/coderbants/rusty-colorprofile/actions/workflows/ci.yml/badge.svg" alt="Build Status"></a>
 </p>
 
-# Charming Colorprofile (`charming-colorprofile`)
+# Rusty Colorprofile (`rusty-colorprofile`)
 
-**Charming Colorprofile** is a complete, from-scratch Rust port of [colorprofile](https://github.com/charmbracelet/colorprofile), Charmbracelet's ANSI color-profile detection library — automatic downsampling of colors based on output, environment variables, and Terminfo databases. It tracks upstream on a rolling basis. **Version policy: the crate version and every release tag must equal the tracked upstream version exactly — never ahead, never behind** (enforced by `scripts/verify_upstream_version.sh` in CI and on every release). It shares the **1:1 parity** goals of the rest of the Charming port family, favoring fidelity to upstream semantics over Rust-native rewrites.
+**Rusty Colorprofile** is a complete, from-scratch Rust port of [colorprofile](https://github.com/charmbracelet/colorprofile), Charmbracelet's ANSI color-profile detection library — automatic downsampling of colors based on output, environment variables, and Terminfo databases. It tracks upstream on a rolling basis. **Version policy: the crate version and every release tag must equal the tracked upstream version exactly — never ahead, never behind** (enforced by `scripts/verify_upstream_version.sh` in CI and on every release). It shares the **1:1 parity** goals of the rest of the Rusty port family, favoring fidelity to upstream semantics over Rust-native rewrites.
 
-It's part of the Charming port family of the Bubble Tea ecosystem and builds on [charming-x-ansi](https://github.com/coderbants/charming-x-ansi) (ANSI primitives); it's used by [charming-ultraviolet](https://github.com/coderbants/charming-ultraviolet), [charming-lipgloss](https://github.com/coderbants/charming-lipgloss) and [charming-bubbletea](https://github.com/coderbants/charming-bubbletea).
+It's part of the Rusty port family of the Bubble Tea ecosystem and builds on [rusty-x-ansi](https://github.com/coderbants/rusty-x-ansi) (ANSI primitives); it's used by [rusty-ultraviolet](https://github.com/coderbants/rusty-ultraviolet), [rusty-lipgloss](https://github.com/coderbants/rusty-lipgloss) and [rusty-bubbletea](https://github.com/coderbants/rusty-bubbletea).
 
 Ported by hand from the upstream Go source (checked out in `upstream-go/`, gitignored);
 see `UPSTREAM_MAPPING.md` for the full accounting. Verified byte-for-byte against the Go
-library via the workspace parity harness (`/Users/jonny/Projects/charming/tools/go-probes/`).
+library via the workspace parity harness (`/Users/jonny/Projects/rusty/tools/go-probes/`).
 
 ## Installation
 
 ```sh
-cargo add charming-colorprofile
+cargo add rusty-colorprofile
 ```
 
 
@@ -27,9 +27,9 @@ Detect the color profile for a terminal, then downsample colors to what it
 supports:
 
 ```rust
-use charming_colorprofile::{detect, Profile};
-use charming_x_ansi::style::Color;
-use charming_x_ansi::color::RGBColor;
+use rusty_colorprofile::{detect, Profile};
+use rusty_x_ansi::style::Color;
+use rusty_x_ansi::color::RGBColor;
 use std::io::IsTerminal;
 
 // Detect the profile from whether we're attached to a TTY and the

@@ -1,6 +1,6 @@
-# Contributing to `charming-colorprofile`
+# Contributing to `rusty-colorprofile`
 
-Thanks for your interest in contributing! `charming-colorprofile` is a cleanroom Rust
+Thanks for your interest in contributing! `rusty-colorprofile` is a cleanroom Rust
 port of the upstream Go [charmbracelet/colorprofile](https://github.com/charmbracelet/colorprofile)
 library, pinned to upstream tag `v0.4.3`.
 
