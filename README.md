@@ -1,4 +1,4 @@
-<p>
+<p align="center">
     <a href="rusty-colorprofile.png"><img src="rusty-colorprofile.png" width="313" alt="Rusty Colorprofile"></a><br>
     <a href="https://crates.io/crates/rusty-colorprofile"><img src="https://img.shields.io/crates/v/rusty-colorprofile.svg" alt="crates.io"></a>
     <a href="https://github.com/coderbants/rusty-colorprofile/actions"><img src="https://github.com/coderbants/rusty-colorprofile/actions/workflows/ci.yml/badge.svg" alt="Build Status"></a>
