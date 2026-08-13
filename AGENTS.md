@@ -20,10 +20,12 @@
    conversions (`convert_256`/`convert_16`).
 
 ## Releases
+- **Version policy: the crate version and every release tag MUST equal the tracked upstream
+  version exactly** (the `Upstream Target Tag / Version` header in `src/lib.rs`) — never
+  ahead, never behind. `scripts/verify_upstream_version.sh` enforces this in CI and in the
+  publish workflow. If upstream has not yet overtaken the published crate version, DO NOT
+  bump or release — wait for upstream, then set the crate version to the upstream version.
 - GitHub Releases MUST match upstream: upstream colorprofile publishes releases, so this
   repo must too. Push the `v0.4.3` tag to create the release (the publish workflow runs
   tests and creates the GitHub Release automatically).
 - The crates.io publish step is tag-gated; dev pushes only run tests.
-- Sibling `charming-*` repos referenced via `path` dependencies must be **public** on
-  GitHub: the workflow `GITHUB_TOKEN` cannot clone private siblings, so CI fetches them via
-  `actions/checkout` at `siblings/<name>` (moved into `../` afterwards).
