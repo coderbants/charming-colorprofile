@@ -4,14 +4,14 @@ version = 4
 
 [[package]]
 name = "charming-colorprofile"
-version = "0.4.4"
+version = "0.4.5"
 dependencies = [
  "charming-x-ansi",
 ]
 
 [[package]]
 name = "charming-x-ansi"
-version = "0.0.0-20260812000000"
+version = "0.0.0-20260813000000"
 dependencies = [
  "libc",
  "unicode-segmentation",
