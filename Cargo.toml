@@ -6,4 +6,4 @@ description = "Cleanroom Rust port of Charmbracelet's colorprofile v0.4.3 (color
 license = "MIT"
 
 [dependencies]
-charming-x-ansi = { path = "../charming-x-ansi" }
+charming-x-ansi = { version = "0.0.0-20260812000000", path = "../charming-x-ansi" }
