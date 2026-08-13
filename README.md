@@ -6,7 +6,7 @@
 
 # Charming Colorprofile (`charming-colorprofile`)
 
-**Charming Colorprofile** is a complete, from-scratch Rust port of [colorprofile](https://github.com/charmbracelet/colorprofile), Charmbracelet's ANSI color-profile detection library — automatic downsampling of colors based on output, environment variables, and Terminfo databases. It tracks upstream on a rolling basis — this crate mirrors upstream `v0.4.3` — with the same **1:1 parity** goals as the rest of the Charming port family, favoring fidelity to upstream semantics over Rust-native rewrites.
+**Charming Colorprofile** is a complete, from-scratch Rust port of [colorprofile](https://github.com/charmbracelet/colorprofile), Charmbracelet's ANSI color-profile detection library — automatic downsampling of colors based on output, environment variables, and Terminfo databases. It tracks upstream on a rolling basis, with crate versions mirroring the upstream Go tags, and the same **1:1 parity** goals as the rest of the Charming port family, favoring fidelity to upstream semantics over Rust-native rewrites.
 
 It's part of the Charming port family of the Bubble Tea ecosystem and builds on [charming-x-ansi](https://github.com/coderbants/charming-x-ansi) (ANSI primitives); it's used by [charming-ultraviolet](https://github.com/coderbants/charming-ultraviolet), [charming-lipgloss](https://github.com/coderbants/charming-lipgloss) and [charming-bubbletea](https://github.com/coderbants/charming-bubbletea).
 
