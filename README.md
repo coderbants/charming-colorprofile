@@ -2,7 +2,7 @@
     <a href="rusty-colorprofile.png"><img src="rusty-colorprofile.png" width="313" alt="Rusty Colorprofile"></a><br>
     <a href="https://crates.io/crates/rusty-colorprofile"><img src="https://img.shields.io/crates/v/rusty-colorprofile.svg" alt="crates.io"></a>
     <a href="https://github.com/coderbants/rusty-colorprofile/actions"><img src="https://github.com/coderbants/rusty-colorprofile/actions/workflows/ci.yml/badge.svg" alt="Build Status"></a>
-    <a href="https://app.codecov.io/gh/coderbants/rusty-colorprofile"><img src="https://codecov.io/gh/coderbants/rusty-colorprofile/branch/dev/graph/badge.svg" alt="codecov"></a>
+    <a href="coverage.svg"><img src="coverage.svg" alt="coverage"></a>
 
 </p>
 
