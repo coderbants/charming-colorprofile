@@ -8,7 +8,7 @@
 
 # Rusty Colorprofile (`rusty-colorprofile`)
 
-**Rusty Colorprofile** is a complete, from-scratch Rust port of [colorprofile](https://github.com/charmbracelet/colorprofile), Charmbracelet's ANSI color-profile detection library — automatic downsampling of colors based on output, environment variables, and Terminfo databases. It tracks upstream on a rolling basis. **Version policy: the crate version and every release tag must equal the tracked upstream version exactly — never ahead, never behind** (enforced by `scripts/verify_upstream_version.sh` in CI and on every release). It shares the **1:1 parity** goals of the rest of the Rusty port family, favoring fidelity to upstream semantics over Rust-native rewrites.
+**Rusty Colorprofile** is a complete, from-scratch Rust port of [colorprofile](https://github.com/charmbracelet/colorprofile), Charmbracelet's ANSI color-profile detection library — automatic downsampling of colors based on output, environment variables, and Terminfo databases. It tracks upstream on a rolling basis under the family's [porting policies](./POLICIES.md): versions mirror upstream exactly, never ahead or behind, with a hard goal of **1:1 behavioural, visual and license parity**, favouring fidelity to upstream semantics over Rust-native rewrites.
 
 It's part of the Rusty port family of the Bubble Tea ecosystem and builds on [rusty-x-ansi](https://github.com/coderbants/rusty-x-ansi) (ANSI primitives); it's used by [rusty-ultraviolet](https://github.com/coderbants/rusty-ultraviolet), [rusty-lipgloss](https://github.com/coderbants/rusty-lipgloss) and [rusty-bubbletea](https://github.com/coderbants/rusty-bubbletea).
 
