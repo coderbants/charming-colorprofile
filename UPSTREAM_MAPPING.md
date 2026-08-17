@@ -22,9 +22,9 @@ and rusty-bubbletea v2.0.8 require colorprofile v0.4.3, so a single pin is neede
 
 | Upstream Go Test File | Rust Equivalent / Status | Notes / Description |
 | :--- | :--- | :--- |
-| `profile_test.go` | `src/lib.rs` (tests) | `Convert` vectors |
-| `env_test.go` | `src/env.rs` (tests) | Detect/Env vectors (TERM matrix, NO_COLOR, CLICOLOR_FORCE, non-TTY) |
-| `writer_test.go` | `src/writer.rs` (tests) | Writer golden vectors (TrueColor/ANSI256/ANSI/ASCII) |
+| `profile_test.go` | `tests/profile_test.rs` + `src/lib.rs` (tests) | `Convert`/`Convert256` vectors |
+| `env_test.go` | `tests/env_test.rs` + `src/env.rs` (tests) | Detect/Env/terminfo/tmux vectors (TERM matrix, NO_COLOR, CLICOLOR, non-TTY) |
+| `writer_test.go` | `tests/writer_test.rs` + `src/writer.rs` (tests) | Writer golden vectors (TrueColor/ANSI256/ANSI/ASCII), middleware, benchmarks |
 
 ## Examples
 

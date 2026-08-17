@@ -7,7 +7,7 @@
 //! </public-docs>
 
 use crate::{detect, Profile};
-use rusty_x_ansi::color::{BasicColor, IndexedColor, RGBColor};
+use rusty_x_ansi::color::BasicColor;
 use rusty_x_ansi::parser::{decode_sequence, get_parser, has_csi_prefix};
 use rusty_x_ansi::style::{read_style_color, Color};
 use std::io::{self, Write};
@@ -77,6 +77,19 @@ impl<W: Write> Writer<W> {
     /// WriteString writes the given text to the underlying writer.
     pub fn write_string(&mut self, s: &str) -> io::Result<usize> {
         self.write(s.as_bytes())
+    }
+}
+
+/// The port implements `std::io::Write` for parity with the upstream Go
+/// `io.Writer` interface, so the writer can be composed with buffered or
+/// layered writers.
+impl<W: Write> std::io::Write for Writer<W> {
+    fn write(&mut self, buf: &[u8]) -> io::Result<usize> {
+        Writer::write(self, buf)
+    }
+
+    fn flush(&mut self) -> io::Result<()> {
+        self.forward.flush()
     }
 }
 
@@ -277,9 +290,6 @@ fn handle_sgr(profile: &Profile, parser: &rusty_x_ansi::parser::Parser, buf: &mu
 
     let _ = write!(buf, "\x1b[{}m", style.join(";"));
 }
-
-#[allow(unused)]
-fn _color_types(_: (BasicColor, IndexedColor, RGBColor)) {}
 
 #[cfg(test)]
 mod tests {

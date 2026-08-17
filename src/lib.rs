@@ -14,7 +14,6 @@ pub use writer::{new_writer, Writer};
 
 use rusty_x_ansi::color::{ansi256_to_16, convert_16, convert_256};
 use rusty_x_ansi::style::Color;
-use std::sync::OnceLock;
 
 /// Profile is a color profile: NoTTY, Ascii, ANSI, ANSI256, or TrueColor.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Default)]
@@ -90,13 +89,6 @@ pub fn convert16(c: u8) -> rusty_x_ansi::color::BasicColor {
 /// Re-exported for parity with the upstream `ansi.Convert256` usage.
 pub fn convert256(r: u8, g: u8, b: u8) -> rusty_x_ansi::color::IndexedColor {
     convert_256(r, g, b)
-}
-
-/// A global cache placeholder to keep parity with the upstream API shape.
-#[allow(dead_code)]
-fn cache() -> &'static OnceLock<()> {
-    static CACHE: OnceLock<()> = OnceLock::new();
-    &CACHE
 }
 
 #[cfg(test)]

@@ -204,11 +204,7 @@ fn env_color_profile(env: &Environ) -> Profile {
         return Profile::TrueColor;
     }
 
-    if env
-        .get("GOOGLE_CLOUD_SHELL")
-        .parse::<bool>()
-        .unwrap_or(false)
-    {
+    if parse_bool(&env.get("GOOGLE_CLOUD_SHELL")).unwrap_or(false) {
         return Profile::TrueColor;
     }
 
