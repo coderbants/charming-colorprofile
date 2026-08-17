@@ -91,9 +91,10 @@ fn test_convert_vectors() {
         (hex("#eeeeee"), Profile::Ansi256, Color::Indexed(255)),
     ];
     for (i, (input, profile, expected)) in cases.iter().enumerate() {
+        let got = profile.convert(*input);
         assert_eq!(
-            &profile.convert(input.clone()),
-            &Some(expected.clone()),
+            &got,
+            &Some(*expected),
             "case {i}: profile={profile:?} input={input:?}"
         );
     }

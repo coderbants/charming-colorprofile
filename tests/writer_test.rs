@@ -5,14 +5,12 @@ use rusty_colorprofile::{detect, new_writer, Profile, Writer};
 
 fn write_with(profile: Profile, input: &str) -> String {
     let mut out: Vec<u8> = Vec::new();
-    {
-        let mut w = Writer {
-            forward: &mut out,
-            profile,
-        };
-        let _ = w.write(input.as_bytes());
-        drop(w);
+    Writer {
+        forward: &mut out,
+        profile,
     }
+    .write(input.as_bytes())
+    .unwrap();
     String::from_utf8(out).unwrap()
 }
 
